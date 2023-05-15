@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Content Summarization and Image Generation</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <style>  
+    textarea {
+        padding: 20px;
+        width: 700px;
+        height: 300px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;   
+    }
+
+    input[type=button] {
+      float: right;
+     }
+
+    .header {
+      text-align: center;
+      font-size: 24px;
+    }
+
+    #response {
+      width: 718px;
+      margin-top: 40px;
+      line-height: 23px;
+      background-color: #fbfbfb;
+      padding: 13px;
+    }
+
+    .title {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .story {
+      text-align: center;
+      padding: 13px;
+    }
+
+    .picture {
+      display: flex;
+      justify-content: center;
+      margin: 6px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <div class="header">Text Summarization and Image Generation</div>
+      <div class="story"><a href="https://read.gov/aesop/013.html" target="_blank">Animal Stories</a></div>
+      <div id="wait"></div>
+      <div>
+        <textArea id="content" placeholder="Please provide a story about an animal."></textArea>
+      </div>
+      <div>
+        <input id="process" type="button" value="Process">
+      </div>
+
+      <div id="response">
+       
+      </div>
+    </div>
+  </div>
+ 
+  <script>
+    $(document).ready(function() {
+
+      function getData(data) {
+        $("#wait").text("Wait...")
+
+        $.ajax({
+          type: 'POST',
+          url: '/api/data',
+          data,
+          success: function(response) {
+            console.log({ response})
+            $('#response').append(`
+                <div>${$("#content").val()}</div>
+                <div class="title"><b>Summarization</b></div>
+                <div>${response.summarized}</div>`
+            );
+
+            const imageText = `${response.structuredOutput.Adjective} ${response.structuredOutput['Animal name']}`
+            $('#response').append(`
+              <div class="title"><b>Text to Image (${imageText})</b></div>`
+            );
+
+            $('#response').append(`
+              <div class="picture"><img src="${response.replicateResponse}" alt="${imageText}"  title="${imageText}" /></div>`
+            );
+            
+            $('#response').append("<hr />")
+       
+            $("#content").val("")
+            $("#wait").text("")
+          },
+          error: function(xhr, status, error) {
+            $("#wait").text("")
+            console.error(error);
+            alert(error.message || error)
+          }
+        });
+      }
+
+      $("#process").click(function (e) {    
+          const content = $("#content").val()      
+          if(!content) {
+            alert("Please provide a story about an animal.")
+            return
+          }
+        getData({ content })        
+      });
+    });
+  </script>
+</body>
+</html>

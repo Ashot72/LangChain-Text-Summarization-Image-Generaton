@@ -1,0 +1,221 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{color:#0563C1;
+	text-decoration:underline;}
+.MsoChpDefault
+	{font-family:"Calibri",sans-serif;}
+.MsoPapDefault
+	{margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link="#0563C1" vlink="#954F72" style='word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;line-height:107%'>LangChain Summarization and Image
+Generation</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>GitHub
+Repository:</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Video link: </span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>You can read
+about LangChain in my GitHub Repositry when discussing <i>LangChain
+Documentation Helper </i></span><a
+href="https://github.com/Ashot72/LangChain-Documentation-Helper" target="_blank"><i><span
+style='font-size:14.0pt;line-height:107%'>https://github.com/Ashot72/LangChain-Documentation-Helper</span></i></a></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>In this app first
+we are going to paste some content about an animal story, and note it can be
+very long and we will not get maximum token exceed exception as we chank the
+content up.<i> </i></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>ChatGPT can
+summarize text by analyzing the content and generating a condensed version
+while preserving the main ideas and critical information.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'><img
+border=0 width=1084 height=375 id="Picture 1" src="doc_files/image001.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 1</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>In our app
+we get an animal story, chunk it up first to avoid maximum token issue then
+summarize it.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'><img
+border=0 width=1045 height=639 id="Picture 2" src="doc_files/image002.png"></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 2</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Instead of reading
+a big document you can read the generated summarized content.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'><img
+border=0 width=1133 height=709 id="Picture 3" src="doc_files/image003.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 3</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>After
+getting the summarized content I want to have a structured (JSON) document
+generated from the newly generated summarized content. The </span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>structure I
+want to be is <i>Animal name </i>and <i>Adjective</i> keys with their
+respective values.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'><img
+border=0 width=957 height=754 id="Picture 4" src="doc_files/image004.png"></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 4</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>The key
+point here is the template structure. I mentioned that I want to extract the
+animal (or animals name) and describe it as an adjective. In my
+StructuredOuptputParser I defined the fields</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>and by
+calling <i>parse</i> method I can get the structured JSON output that I will pass
+it to the front end with other properties. Note, that I also pass format
+instructions to the template.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'><img
+border=0 width=1076 height=531 id="Picture 5" src="doc_files/image005.png"></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 5</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Here you see
+my structured JSON object.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'><img
+border=0 width=1177 height=725 id="Picture 6" src="doc_files/image006.png"></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 6</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>On the front
+end you see that we are going to generate an image from that JSON properties
+composed by <i>Adjective</i> then <i>Animal name</i> keys.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><img border=0 width=1123 height=690 id="Picture 7"
+src="doc_files/image007.png"></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 7</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>The last
+thing that we do is generating image form the text described above using
+Replicate.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Replicate </span><a
+href="https://replicate.com/blog/machine-learning-needs-better-tools"
+target="_blank"><span style='font-size:14.0pt;line-height:107%'>https://replicate.com/blog/machine-learning-needs-better-tools</span></a><span
+style='font-size:14.0pt;line-height:107%'> runs machine learning models on the
+cloud. They have a library of open-source</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>models that
+we can run with a few lines of code.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><img border=0 width=1152 height=576 id="Picture 8"
+src="doc_files/image008.jpg"></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 8</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>You can sign
+up and get you api key to use it in the app. Seems you can generate some images
+free of charge at some point.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><img border=0 width=1153 height=521 id="Picture 9"
+src="doc_files/image009.jpg"></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 9</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>You see we
+use open-source stability-ai stable-diffusion model to generate an image from a
+text.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><img border=0 width=1143 height=536 id="Picture 10"
+src="doc_files/image010.png"></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 10</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>You see the
+image generated and we render it on the page using <i>img</i> tag.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal><img border=0 width=1153 height=622 id="Picture 11"
+src="doc_files/image011.jpg"></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Figure 11</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>Note, that
+we do not explicitly specify API keys in the code. It will be picked up from
+.env file when specified as OPEN_API_KEY and REPLICATE_API_KEY.</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt;line-height:107%'>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
