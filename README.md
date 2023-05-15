@@ -2,7 +2,7 @@
 
  [LangChain](https://js.langchain.com/docs/) is de facto go to framework for building LLM (Large Language Model) based applications. It gains massive popularity lately for developers wanting to get into AI (Artificial Intelligence) and to build AI based applications. 
 
-I built very basic LangChain Node.js Text Summarization and Iage Generation app using LLM (Large Language Model). We will summarize long texts and generate images from an animal story.
+I built very basic LangChain Node.js Text Summarization and Image Generation app using LLM (Large Language Model). We will summarize long texts and generate images from an animal story.
 
 In my [LangChain Documentation Helper](https://github.com/Ashot72/LangChain-Documentation-Helper) app I talked about LangChain in detail.
 
