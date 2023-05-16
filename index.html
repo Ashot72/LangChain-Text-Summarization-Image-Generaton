@@ -82,7 +82,6 @@
           url: '/api/data',
           data,
           success: function(response) {
-            console.log({ response})
             $('#response').append(`
                 <div>${$("#content").val()}</div>
                 <div class="title"><b>Summarization</b></div>
@@ -105,8 +104,7 @@
           },
           error: function(xhr, status, error) {
             $("#wait").text("")
-            console.error(error);
-            alert(error.message || error)
+            alert(error)
           }
         });
       }
